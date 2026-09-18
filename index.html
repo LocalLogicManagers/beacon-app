@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beacon — track rankings, plan content, and prove what's working</title>
+<meta name="description" content="Beacon is a command center for organic search and campaign work: keyword rank tracking, on-page SEO audits, a content calendar, backlink monitoring, and budget-aware performance dashboards. Built by Local Logic Management.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ---------- hero ---------- */
+  .hero{padding:96px 0 80px; overflow:hidden;}
+  .hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; margin-top:28px;}
+  .hero h1{font-size:48px; line-height:1.08; font-weight:800; letter-spacing:-.02em;}
+  .hero h1 em{font-style:normal; color:var(--accent);}
+  .hero p.lede{font-size:17.5px; color:var(--text-muted); margin-top:22px; max-width:520px;}
+  .hero-actions{display:flex; align-items:center; gap:16px; margin-top:34px;}
+  .hero-note{font-size:13px; color:var(--text-dim); margin-top:18px;}
+
+  /* ---------- platform strip ---------- */
+  .platforms{border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:var(--bg-elevated);}
+  .platforms-inner{display:flex; align-items:center; justify-content:space-between; gap:24px; padding:26px 0; flex-wrap:wrap;}
+  .platforms-label{font-size:12px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.08em; font-weight:600; white-space:nowrap;}
+  .platform-chips{display:flex; gap:10px; flex-wrap:wrap;}
+  .chip{
+    font-family:var(--font-mono); font-size:13px; color:var(--text-muted);
+    border:1px solid var(--border); background:var(--bg-card); padding:7px 14px; border-radius:100px;
+  }
+
+  /* ---------- how it works ---------- */
+  .steps{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  .step{background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:26px 22px;}
+  .step .n{font-family:var(--font-mono); font-size:13px; font-weight:700; color:var(--accent);}
+  .step h3{font-size:17px; margin-top:14px; font-weight:600;}
+  .step p{font-size:14px; color:var(--text-muted); margin-top:10px;}
+  .step .call{margin-top:14px; font-family:var(--font-mono); font-size:11.5px; color:var(--text-dim); background:var(--bg-elevated-solid); border:1px solid var(--border); border-radius:8px; padding:8px 10px; overflow-x:auto; white-space:nowrap;}
+
+  /* ---------- feature grid ---------- */
+  .features{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .feature{background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:28px;}
+  .feature .icon{
+    width:38px; height:38px; border-radius:10px; background:var(--accent-soft);
+    display:flex; align-items:center; justify-content:center; margin-bottom:18px;
+  }
+  .feature h3{font-size:16px; font-weight:600;}
+  .feature p{font-size:14px; color:var(--text-muted); margin-top:10px;}
+
+  /* ---------- rank snapshot section ---------- */
+  .track-grid{display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:start;}
+  .track-notes{padding-top:6px;}
+  .track-note{display:flex; gap:14px; margin-bottom:24px;}
+  .track-note .dot{width:8px; height:8px; border-radius:50%; background:var(--accent); margin-top:7px; flex-shrink:0;}
+  .track-note h4{font-size:15px; font-weight:600;}
+  .track-note p{font-size:13.5px; color:var(--text-muted); margin-top:6px;}
+
+  /* ---------- roadmap ---------- */
+  .roadmap{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .road-card{border:1px solid var(--border); border-radius:var(--radius); padding:24px; position:relative;}
+  .road-card.now{background:var(--bg-card);}
+  .road-card.next{background:transparent; border-style:dashed;}
+  .road-tag{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; padding:4px 10px; border-radius:100px; display:inline-block; margin-bottom:14px;}
+  .road-tag.now{background:var(--up-soft); color:var(--up);}
+  .road-tag.next{background:var(--bg-elevated-solid); color:var(--text-dim); border:1px solid var(--border);}
+  .road-card h3{font-size:16px; font-weight:600;}
+  .road-card ul{margin:12px 0 0; padding-left:18px; font-size:13.5px; color:var(--text-muted);}
+  .road-card li{margin-bottom:6px;}
+
+  /* ---------- trust ---------- */
+  .trust{
+    background:var(--bg-elevated-solid); border:1px solid var(--border); border-radius:20px;
+    padding:44px; display:flex; align-items:center; gap:36px;
+  }
+  .trust-mark{
+    width:56px; height:56px; border-radius:14px; background:var(--bg-card); border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .trust h3{font-size:18px; font-weight:600;}
+  .trust p{font-size:14.5px; color:var(--text-muted); margin-top:8px; max-width:640px;}
+  .trust a{color:var(--accent); font-weight:600;}
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr; gap:40px;}
+    .hero h1{font-size:36px;}
+    .steps, .features, .roadmap, .track-grid{grid-template-columns:1fr;}
+    .platforms-inner{justify-content:flex-start;}
+    .trust{flex-direction:column; text-align:center;}
+  }
+  @media (max-width:560px){
+    .section h2{font-size:28px;}
+    .signup{padding:44px 24px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="brand">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+        <circle cx="7" cy="19" r="2.2" fill="#ffb648"/>
+        <path d="M11 15C13.5 15 15.5 17 15.5 19.5" stroke="#34d1a6" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M14 11C18 11 21 14 21 18" stroke="#6ea8fe" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+      Beacon
+      <span class="sub">by Local Logic Management</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#tracking">Tracking</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="https://www.locallogicmanagement.com" target="_blank" rel="noopener" class="nav-links-mobile-only">Local Logic Management ↗</a>
+      <a href="#signup" class="btn btn-primary nav-links-mobile-only">Request early access</a>
+    </div>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="https://www.locallogicmanagement.com" target="_blank" rel="noopener">Local Logic Management ↗</a>
+      <a class="btn btn-primary" href="#signup">Request early access</a>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="glow"></div>
+  <div class="wrap" style="position:relative; z-index:1;">
+    <span class="eyebrow"><span class="dot"></span> Private beta — accepting early access requests</span>
+    <div class="hero-grid">
+      <div>
+        <h1>Stop guessing whether your SEO is working.<br><em>Beacon</em> shows you the signal.</h1>
+        <p class="lede">Beacon tracks your keyword rankings, audits your pages, plans your content calendar, and rolls campaign spend and results into one dashboard — so you always know what's moving the needle, not just what you shipped.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#signup">Request early access</a>
+          <a class="btn btn-ghost" href="#tracking">See a sample report</a>
+        </div>
+        <p class="hero-note">Works alongside Google Search Console &amp; GA4 — connect once, sync automatically. <a href="#how" style="color:var(--text-muted); text-decoration:underline;">See how it works ↓</a></p>
+      </div>
+      <div class="mock">
+        <div class="mock-head">
+          <div class="mock-title">Watching · 4 sites</div>
+          <div class="mock-dots"><span></span><span></span><span></span></div>
+        </div>
+        <div id="mockCards"></div>
+        <div class="mock-foot"><span class="pulse"></span> Checking rankings over MCP</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="platforms">
+  <div class="wrap platforms-inner">
+    <span class="platforms-label">Works alongside the tools you already run</span>
+    <div class="platform-chips">
+      <span class="chip">Search Console</span>
+      <span class="chip">GA4</span>
+      <span class="chip">WordPress</span>
+      <span class="chip">Shopify</span>
+      <span class="chip">Webflow</span>
+      <span class="chip">LinkedIn</span>
+      <span class="chip">X</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">How it works</span>
+      <h2>One dashboard, four moving parts.</h2>
+      <p>Beacon doesn't replace your analytics — it pulls the pieces that live in five different tabs into one place you actually check.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="n">01</div>
+        <h3>Connect</h3>
+        <p>Point Beacon at your site, Search Console, and analytics account once. Every teammate shares the same connection.</p>
+        <div class="call">beacon.connect(site, integrations)</div>
+      </div>
+      <div class="step">
+        <div class="n">02</div>
+        <h3>Track</h3>
+        <p>Beacon checks your keyword positions daily and flags on-page issues — titles, headers, alt text — as they appear.</p>
+        <div class="call">beacon.track_rankings(keywords)</div>
+      </div>
+      <div class="step">
+        <div class="n">03</div>
+        <h3>Plan</h3>
+        <p>Lay content and campaigns out on a shared calendar, with budget and channel attached to each entry.</p>
+        <div class="call">beacon.plan_campaign(calendar, budget)</div>
+      </div>
+      <div class="step">
+        <div class="n">04</div>
+        <h3>Report</h3>
+        <p>See what's actually moving rankings and spend in one dashboard — no exporting into slides before the Monday meeting.</p>
+        <div class="call">beacon.generate_report(range)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="features" style="background:var(--bg-elevated); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Features</span>
+      <h2>Everything a search &amp; campaign lead checks weekly.</h2>
+      <p>Six pieces that usually live in six different tools, tracking the same site.</p>
+    </div>
+    <div class="features">
+      <div class="feature">
+        <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 18L10 12L14 16L20 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Keyword rank tracking</h3>
+        <p>Daily position checks across the keywords that matter, split by device and location, with history you can actually trend.</p>
+      </div>
+      <div class="feature">
+        <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+        <h3>On-page SEO audits</h3>
+        <p>A running checklist against the things that actually move rankings — titles, headers, meta, alt text, internal links — scored per page.</p>
+      </div>
+      <div class="feature">
+        <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="15" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M4 9.5h16M8 3v3M16 3v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h3>Content calendar</h3>
+        <p>Plan posts and pages by channel and owner, see what's due, and keep publishing cadence visible to the whole team.</p>
+      </div>
+      <div class="feature">
+        <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M8 12a4 4 0 1 1 0-8h1M16 12a4 4 0 1 0 0 8h-1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h3>Backlink monitoring</h3>
+        <p>New and lost backlinks tracked automatically, with authority context so you know which ones are worth a thank-you.</p>
+      </div>
+      <div class="feature">
+        <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3v3M12 18v3M4.2 12H3M21 12h-1.2M6 6l1 1M17 17l1 1M18 6l-1 1M7 17l-1 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/></svg></div>
+        <h3>Campaign &amp; budget tracking</h3>
+        <p>Spend, channel, and campaign goals in one place — cost per result sits next to organic performance, not in a separate sheet.</p>
+      </div>
+      <div class="feature">
+        <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Social post scheduler</h3>
+        <p>Queue and schedule posts across channels from the same calendar that drives the rest of your content plan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="tracking">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Rank tracking</span>
+      <h2>See exactly where you rank — and where you're headed.</h2>
+      <p>Sample data, shown for illustration — the shape your own keyword dashboard would take.</p>
+    </div>
+    <div class="track-grid">
+      <div class="rank-panel">
+        <div class="rank-head"><span>Tracked keywords · locallogicmanagement.com</span></div>
+        <table class="rank-table">
+          <thead>
+            <tr><th>Keyword</th><th>Position</th><th>7-day</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="kw">ai program management</td><td class="pos">#9</td><td><span class="delta up">↑ 5</span></td></tr>
+            <tr><td class="kw">devsecops pipeline audit</td><td class="pos">#4</td><td><span class="delta flat">— 0</span></td></tr>
+            <tr><td class="kw">mcp server deploy</td><td class="pos">#17</td><td><span class="delta up">↑ 12</span></td></tr>
+            <tr><td class="kw">phishing screening agent</td><td class="pos">#6</td><td><span class="delta down">↓ 2</span></td></tr>
+            <tr><td class="kw">ai readiness audit</td><td class="pos">#11</td><td><span class="delta up">↑ 3</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="track-notes">
+        <div class="track-note">
+          <span class="dot"></span>
+          <div><h4>Checked daily, not whenever you remember</h4><p>Positions refresh every day per keyword, per device and location, so a ranking dip shows up before a client asks about it.</p></div>
+        </div>
+        <div class="track-note">
+          <span class="dot"></span>
+          <div><h4>Tied to the page it's ranking for</h4><p>Every keyword links back to the on-page audit for that URL, so a rank drop and a broken title tag show up in the same view.</p></div>
+        </div>
+        <div class="track-note">
+          <span class="dot"></span>
+          <div><h4>Search Console does the crawling</h4><p>Once connected, Beacon reconciles its own SERP checks against your real Search Console impressions and clicks — not a third-party estimate.</p></div>
+        </div>
+        <p class="fine-print">Beacon is in private beta. Rank data above is illustrative — real tracking pulls from Google Search Console and daily SERP checks once connected.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="roadmap" style="background:var(--bg-elevated); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Roadmap</span>
+      <h2>Search tracking first. The rest of the campaign next.</h2>
+      <p>We'd rather tell you exactly what's real today than oversell the vision. Here's where things stand.</p>
+    </div>
+    <div class="roadmap">
+      <div class="road-card now">
+        <span class="road-tag now">Live in beta</span>
+        <h3>Rank &amp; audit basics</h3>
+        <ul>
+          <li>Daily keyword rank tracking</li>
+          <li>On-page SEO audit checklist</li>
+          <li>Content calendar</li>
+        </ul>
+      </div>
+      <div class="road-card next">
+        <span class="road-tag next">Next up</span>
+        <h3>Connected data</h3>
+        <ul>
+          <li>Backlink monitoring</li>
+          <li>Campaign budget tracking</li>
+          <li>Live Google Search Console sync</li>
+        </ul>
+      </div>
+      <div class="road-card next">
+        <span class="road-tag next">On the horizon</span>
+        <h3>Full campaign layer</h3>
+        <ul>
+          <li>Social post scheduler</li>
+          <li>Multi-site / agency view</li>
+          <li>Audit findings → task hookup</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="trust">
+      <div class="trust-mark">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+          <circle cx="7" cy="19" r="2.2" fill="#ffb648"/>
+          <path d="M11 15C13.5 15 15.5 17 15.5 19.5" stroke="#34d1a6" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M14 11C18 11 21 14 21 18" stroke="#6ea8fe" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <h3>Built by the team already running Local Logic Management's own SEO</h3>
+        <p>Beacon isn't a lab experiment — it's the same rank tracking and content calendar we run for our own site and case studies, packaged so clients can run it themselves. See how it's built: <a href="https://github.com/LocalLogicManagers" target="_blank" rel="noopener">Local Logic Management on GitHub ↗</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="signup" style="padding-top:20px;">
+  <div class="wrap">
+    <div class="signup">
+      <h2>Get on the list for early access.</h2>
+      <p>We're onboarding sites in small batches while Beacon's platform support grows. Leave your email and we'll reach out when it's your turn.</p>
+      <form class="signup-form" id="signupForm">
+        <input type="email" id="signupEmail" placeholder="you@email.com" required>
+        <button class="btn btn-primary" type="submit">Request access</button>
+      </form>
+      <div class="form-msg" id="formMsg"></div>
+      <p class="signup-note">We'll only email you about Beacon access. No spam.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand" style="font-size:17px;">
+        <div class="brand" style="font-size:17px;">
+          <svg width="22" height="22" viewBox="0 0 26 26" fill="none">
+            <circle cx="7" cy="19" r="2.2" fill="#ffb648"/>
+            <path d="M11 15C13.5 15 15.5 17 15.5 19.5" stroke="#34d1a6" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M14 11C18 11 21 14 21 18" stroke="#6ea8fe" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+          Beacon
+        </div>
+        <p>A command center for organic search and campaign work. Built by Local Logic Management.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="#how">How it works</a>
+          <a href="#features">Features</a>
+          <a href="#tracking">Tracking</a>
+          <a href="#roadmap">Roadmap</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="https://www.locallogicmanagement.com" target="_blank" rel="noopener">Local Logic Management</a>
+          <a href="https://www.locallogicmanagement.com#case-studies" target="_blank" rel="noopener">Case studies</a>
+          <a href="mailto:hello@locallogicmanagement.com">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Local Logic Management. Beacon is currently in private beta.</span>
+      <span>Timonium, MD</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // mobile menu (simple show/hide of nav links)
+  const toggle = document.getElementById('menuToggle');
+  const navLinks = document.querySelector('.nav-links');
+  toggle.addEventListener('click', () => {
+    const open = navLinks.style.display === 'flex';
+    navLinks.style.display = open ? 'none' : 'flex';
+    navLinks.style.cssText += 'flex-direction:column; position:absolute; top:64px; left:0; right:0; background:#0a0c16; padding:20px 28px; border-bottom:1px solid #262c48; gap:16px;';
+  });
+
+  // hero mock — cycles through illustrative rank-check events (dummy data)
+  const steps = [
+    {
+      call: 'beacon.check_rank("ai program management")', target: 'GOOGLE', verdict: 'up', label: 'Up 5',
+      body: '#14 → #9 · tracked daily\nus-en · desktop + mobile'
+    },
+    {
+      call: 'beacon.audit_page("/services")', target: 'ON-PAGE', verdict: 'warn', label: '3 issues',
+      body: 'Missing meta description\nH1/H2 order · image alt text'
+    },
+    {
+      call: 'beacon.track_backlink("techcrunch.com")', target: 'BACKLINKS', verdict: 'new', label: 'New link',
+      body: 'DA 91 · referring to /case-studies\nfound in daily crawl'
+    },
+    {
+      call: 'beacon.publish_post("The Tamer's Guide to AI Rollouts")', target: 'CALENDAR', verdict: 'info', label: 'Scheduled',
+      body: 'Blog · due Thu · owner: Zak\nsynced to content calendar'
+    }
+  ];
+
+  const mockCards = document.getElementById('mockCards');
+  let idx = 0;
+
+  function renderCard(){
+    const s = steps[idx];
+    mockCards.innerHTML = `
+      <div class="mock-card">
+        <div class="mock-card-top">
+          <div>
+            <div class="mock-target">${s.target}</div>
+            <div class="mock-call">${s.call}</div>
+          </div>
+          <span class="verdict ${s.verdict}">${s.label}</span>
+        </div>
+        <div class="mock-body">${s.body}</div>
+      </div>
+    `;
+    idx = (idx + 1) % steps.length;
+  }
+
+  renderCard();
+  setInterval(renderCard, 3400);
+
+  // signup form — no backend wired yet, see README for hooking up a real ESP
+  document.getElementById('signupForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const email = document.getElementById('signupEmail').value;
+    const msg = document.getElementById('formMsg');
+    // TODO: replace with a real endpoint (Formspree / ConvertKit / Mailchimp) before launch
+    window.location.href = 'mailto:hello@locallogicmanagement.com?subject=Beacon%20early%20access&body=Please%20add%20' + encodeURIComponent(email) + '%20to%20the%20Beacon%20early%20access%20list.';
+    msg.textContent = "Opening your email client to send the request…";
+    msg.className = 'form-msg ok';
+  });
+</script>
+
+</body>
+</html>
